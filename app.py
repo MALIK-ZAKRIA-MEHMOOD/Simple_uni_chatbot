@@ -1,4 +1,5 @@
 import streamlit as st
+from transformers import pipeline
 
 # Step 3: Define FAQ Data
 faq_data = {
@@ -10,7 +11,11 @@ faq_data = {
 }
 
 # Step 4: Create Chatbot Function
-classifier = pipeline("zero-shot-classification", model="facebook/bart-large-mnli")
+@st.cache_resource  # Cache the model to avoid reloading
+def load_classifier():
+    return pipeline("zero-shot-classification", model="facebook/bart-large-mnli")
+
+classifier = load_classifier()
 
 def faq_chatbot(user_input):
     questions = list(faq_data.keys())
