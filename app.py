@@ -1,5 +1,4 @@
 import streamlit as st
-from transformers import pipeline
 
 # Step 3: Define FAQ Data
 faq_data = {
